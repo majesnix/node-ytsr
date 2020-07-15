@@ -114,7 +114,7 @@ declare module "ytsr" {
     function getFilters(
       searchString: string,
       callback?: Function
-    ): Promise<Map<string, Filter>>;
+    ): Promise<Map<string, Filter[]>>;
   }
 
   function ytsr(
