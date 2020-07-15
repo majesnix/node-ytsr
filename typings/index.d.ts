@@ -1,4 +1,4 @@
-declare module 'ytsr' {
+declare module "ytsr" {
   namespace ytsr {
     interface Options {
       searchString?: string;
@@ -8,7 +8,7 @@ declare module 'ytsr' {
     }
 
     interface Playlist {
-      type: 'playlist';
+      type: "playlist";
       title: string;
       link: string;
       thumbnail: string;
@@ -21,7 +21,7 @@ declare module 'ytsr' {
     }
 
     interface Channel {
-      type: 'channel';
+      type: "channel";
       name: string;
       channel_id: string;
       link: string;
@@ -33,7 +33,7 @@ declare module 'ytsr' {
     }
 
     interface Video {
-      type: 'video';
+      type: "video";
       live: boolean;
       title: string;
       link: string;
@@ -50,7 +50,7 @@ declare module 'ytsr' {
     }
 
     interface Movie {
-      type: 'movie';
+      type: "movie";
       title: string;
       link: string;
       thumbnail: string;
@@ -67,23 +67,30 @@ declare module 'ytsr' {
     }
 
     interface RelatedSearches {
-      type: 'search-refinements';
+      type: "search-refinements";
       entrys: any;
     }
 
     interface ShelfCompact {
-      type: 'shelf-compact';
+      type: "shelf-compact";
       title: string;
       items: any;
     }
 
     interface ShelfVertical {
-      type: 'shelf-vertical';
+      type: "shelf-vertical";
       title: string;
       items: any;
     }
 
-    type Item = Playlist | Channel | Video | Movie | RelatedSearches | ShelfCompact | ShelfVertical;
+    type Item =
+      | Playlist
+      | Channel
+      | Video
+      | Movie
+      | RelatedSearches
+      | ShelfCompact
+      | ShelfVertical;
 
     interface Result {
       query: string;
@@ -97,10 +104,28 @@ declare module 'ytsr' {
       }[];
       currentRef?: string;
     }
+
+    interface Filter {
+        ref?: string;
+        name: string;
+        active: boolean,
+    }
+
+    function getFilters(
+      searchString: string,
+      callback?: Function
+    ): Promise<Map<string, Filter>>;
   }
 
-  function ytsr(id: string, callback: (err: Error, result: ytsr.Result) => any): void;
-  function ytsr(id: string | null, options: ytsr.Options, callback: (err: Error, result: ytsr.Result) => any): void;
+  function ytsr(
+    id: string,
+    callback: (err: Error, result: ytsr.Result) => any
+  ): void;
+  function ytsr(
+    id: string | null,
+    options: ytsr.Options,
+    callback: (err: Error, result: ytsr.Result) => any
+  ): void;
   function ytsr(id: string): Promise<ytsr.Result>;
   function ytsr(id: string | null, options: ytsr.Options): Promise<ytsr.Result>;
 
